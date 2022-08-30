@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import LoginForm from "../ui/LoginForm";
+import axios from "axios"
 
 function LoginPage() {
     const [user, setUser] = useState({ name: "", email: "" })
     const [error, setError] = useState("");
 
-    const Login = details => { console.log(details) }
+    const Login = details => {
+        axios.post("http://localhost:5002/checkLogin", { details }).then((res) => {
+            console.log(res.data);
+        });
+    }
+
 
     const LogOut = details => { console.log("logout") }
 
