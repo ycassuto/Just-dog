@@ -8,6 +8,7 @@ server/.env
 server/dist
 server/src/client
 server/how-to-deploy.md
+server/deploy
 # testing
 /coverage
 
