@@ -24,7 +24,7 @@ app.post('/checkLogin', (request: any, response:any) => {
     Database.isValidUser(details, response)
 });
 
-const port = process.env.PORT || 5002;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log('Hosted: http://localhost:' + port);
 });

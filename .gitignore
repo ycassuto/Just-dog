@@ -5,6 +5,9 @@ node_modules/
 /.pnp
 .pnp.js
 server/.env
+server/dist
+server/src/client
+server/how-to-deploy.md
 # testing
 /coverage
 
