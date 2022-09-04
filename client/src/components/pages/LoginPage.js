@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import LoginForm from "../ui/LoginForm";
+import { Link } from "react-router-dom";
+import LoginForm from "../ui/forms/LoginForm";
 import axios from "axios"
+import { serverURL } from "../../serverURL";
 
 function LoginPage() {
-    const [user, setUser] = useState({ name: "", email: "" })
-    const [error, setError] = useState("");
 
     const Login = details => {
-        axios.post("http://localhost:5002/checkLogin", { details }).then((res) => {
-            console.log(res.data);
+        axios.post(`${serverURL}/checkLogin`, { details }).then((res) => {
+            if (res.data.msg === "User-found") {
+                window.location.href = `${origin}/Home/${res.data.user_id}`
+            }
         });
     }
 
@@ -17,9 +19,8 @@ function LoginPage() {
 
     return (
         <div className="Login-page">
-            {(user.email !== "") ?
-                (<div>Welcome</div>) :
-                (<LoginForm Login={Login} error={error} />)}
+            <LoginForm Login={Login}/>
+            <Link to="/SignUp">sign up</Link>
         </div>
     )
 }

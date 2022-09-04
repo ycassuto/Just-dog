@@ -87,24 +87,32 @@ async function initDb() {
     // );
 }
 
-export async function isValidUser(details: any, serverRes: any) {//return true or false if a user is exist
-    const specialCharsForPassowrd = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-    const specialCharsForEmail = /[`!#$%^&*()_+\-=\[\]{};':"\\|,<>\/?~]/;
-
-    if (!specialCharsForPassowrd.test(details.password) && !specialCharsForEmail.test(details.email)) {
-        client.query(`SELECT * FROM users
+export async function isValidUser(details: any, serverRes: any) {
+    client.query(`SELECT * FROM users
          WHERE email = '${details.email}' 
          AND password = '${details.password}';`, (err: Error, res) => {
-            if (err) throw err;
+        if (err) throw err;
 
-            if (res.rows.length > 0) {
-                serverRes.send(JSON.stringify({ msg: "User-found", user_id: res.rows[0].user_id }))
-            } else {
-                serverRes.send(JSON.stringify({ msg: "Invalid email or password" }))
-            }
-        });
-    } else {
-        serverRes.send(JSON.stringify({ msg: "Sqli attemp" }))
-    }
+        if (res.rows.length > 0) {
+            serverRes.send(JSON.stringify({ msg: "User-found", user_id: res.rows[0].user_id }))
+        } else {
+            serverRes.send(JSON.stringify({ msg: "Invalid email or password" }))
+        }
+    });
 }
 
+export async function addNewUser(details: any, serverRes: any) {
+    client.query(`SELECT * FROM users
+         WHERE email = '${details.email}';`, (err: Error, res) => {
+        if (err) throw err;
+        if (res.rows.length > 0) {
+            serverRes.send(JSON.stringify("Email in use"))
+        } else {
+            client.query(`INSERT INTO users (name, password, email) VALUES ('${details.full_name}', '${details.password}', '${details.email}');`, (err: Error, res) => {
+                if (err) throw err;
+
+                serverRes.send(JSON.stringify("user added"))
+            })
+        }
+    })
+}

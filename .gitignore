@@ -9,6 +9,7 @@ server/dist
 server/src/client
 server/how-to-deploy.md
 server/deploy
+client/src/serverURL.js
 # testing
 /coverage
 
