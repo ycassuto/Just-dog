@@ -2,10 +2,15 @@ import React from 'react'
 
 function DogCard(props) {
 
-    const dogDetails = props.dogDetails
+    const dogDetails = props.data
 
     return (
-       <div>DogCard</div>
+        <div className='dog-card'>
+            <div><p>name: {dogDetails.name}</p></div>
+            <div><p>type: {dogDetails.type}</p></div>
+            <div><p> age: {dogDetails.age}</p></div>
+            <div><p>chip number: {dogDetails.chip_number}</p></div>
+        </div>
     )
 }
 

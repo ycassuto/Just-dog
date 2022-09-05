@@ -16,17 +16,16 @@ function LoginPage() {
             }
 
             if (res.data.msg === "User-found") {
-                window.location.href = `${origin}/Home/${res.data.user_id}`
+                window.location.href = `${origin}/Home/${res.data.user_id}/myDogs`
             }
         });
     }
-
 
     const LogOut = details => { console.log("logout") }
 
     return (
         <div className="Login-page">
-            <LoginForm Login={Login}/>
+            <LoginForm Login={Login} />
             <Link to="/SignUp">sign up</Link>
         </div>
     )

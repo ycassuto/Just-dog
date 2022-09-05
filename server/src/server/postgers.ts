@@ -96,7 +96,7 @@ export async function isValidUser(details: any, serverRes: any) {
         if (res.rows.length > 0) {
             serverRes.send(JSON.stringify({ msg: "User-found", user_id: res.rows[0].user_id }))
         } else {
-            serverRes.send(JSON.stringify({ msg: "Invalid email or password" }))
+            serverRes.send(JSON.stringify("Invalid email or password"))
         }
     });
 }
@@ -113,6 +113,18 @@ export async function addNewUser(details: any, serverRes: any) {
 
                 serverRes.send(JSON.stringify("user added"))
             })
+        }
+    })
+}
+
+export async function getDogsByUserId(userId: string, serverRes: any) {
+    client.query(`SELECT * FROM dogs
+         WHERE user_id=${userId};`, (err: Error, res) => {
+        if (err) throw err;
+        if (res.rows.length > 0) {//user have dogs
+            serverRes.send(JSON.stringify(res.rows))
+        } else {//user dont have dogs
+            serverRes.send(JSON.stringify("no dogs"))
         }
     })
 }
