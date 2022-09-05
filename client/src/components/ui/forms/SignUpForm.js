@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import validation from './SignupValidation';
 import axios from 'axios';
-import { serverURL } from '../../../serverURL';
+
 
 function SignUpForm({ SignUp }) {
 

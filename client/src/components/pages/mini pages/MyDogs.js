@@ -2,13 +2,12 @@ import React, { useState, useEffect} from 'react';
 import axios from "axios";
 
 import DogCard from '../../ui/cards/DogCard';
-import { serverURL } from '../../../serverURL';
 
 function MyDogs(props) {
 
     let [dogs, setDogs] = useState([]);
     useEffect(() => {
-        axios.get(`${serverURL}/getUserDogsById`,{id:props.userId}).then((res) => {
+        axios.get(`/getUserDogsById`,{id:props.userId}).then((res) => {
             setDogs(res.data);
         });
     }, []);
