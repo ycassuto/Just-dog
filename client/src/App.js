@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import LoginPage from "./components/pages/LoginPage"
 import SignUpPage from "./components/pages/SignUpPage"
 import HomePage from "./components/pages/HomePage"
 
 function App() {
-  const [token, setToken] = useState(null);
 
   return (
     <div>

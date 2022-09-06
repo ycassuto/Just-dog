@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import validation from './SignupValidation';
-import axios from 'axios';
-
 
 function SignUpForm({ SignUp }) {
 

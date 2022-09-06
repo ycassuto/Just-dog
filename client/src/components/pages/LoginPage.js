@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import LoginForm from "../ui/forms/LoginForm";
 import axios from "axios"
@@ -20,8 +20,6 @@ function LoginPage() {
             }
         });
     }
-
-    const LogOut = details => { console.log("logout") }
 
     return (
         <div className="Login-page">
