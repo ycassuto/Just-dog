@@ -40,10 +40,26 @@ app.post('/registerNewUser', (request: any, response: any) => {
     }
 });
 
+app.post('/addNewDog', (request: any, response: any) => {
+    let newDog = request.body.dogDetails;
+    let id = request.body.id;
+    if (
+        isValidNameInput(newDog.type) &&
+        isValidNameInput(newDog.name) &&
+        isValidNumberInput(newDog.chipNumber) &&
+        isValidNumberInput(newDog.age) &&
+        isValidNumberInput(id)
+    ) {
+
+        Database.addnewDog(newDog, id, response);
+    } else {
+        response.send("sqli attemp");
+    }
+});
+
 app.post('/getUserDogsById', (request: any, response: any) => {
     let userId = request.body.id
-
-    if (isValidIdInput(userId)) {
+    if (isValidNumberInput(userId)) {
         Database.getDogsByUserId(userId, response);
     } else {
         response.send("sqli attemp");
@@ -68,13 +84,13 @@ function isValidNameInput(name: string) {
     return !specialCharsForName.test(name)
 }
 
-function isValidIdInput(id: string) {
+function isValidNumberInput(id: string) {
     const specialCharsForId = /^[0-9]+$/;
 
     return specialCharsForId.test(id)
 }
 
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5002;
 app.listen(port, () => {
     console.log('Hosted: http://localhost:' + port);
 });

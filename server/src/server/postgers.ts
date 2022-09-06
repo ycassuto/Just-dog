@@ -117,6 +117,14 @@ export async function addNewUser(details: any, serverRes: any) {
     })
 }
 
+export async function addnewDog(dogDetails: any, userId: string, serverRes: any) {
+    client.query(`INSERT INTO dogs (name, age, type, chip_number, user_id) VALUES ('${dogDetails.name}', ${dogDetails.age}, '${dogDetails.type}', ${dogDetails.chipNumber}, ${userId});`, (err: Error, res) => {
+        if (err) throw err;
+
+        serverRes.send(JSON.stringify("dog added"))
+    });
+}
+
 export async function getDogsByUserId(userId: string, serverRes: any) {
     client.query(`SELECT * FROM dogs
          WHERE user_id=${userId};`, (err: Error, res) => {
