@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { useParams } from 'react-router-dom';
-
+import { serverURL } from '../../../serverURL.js';
 import DogCard from '../../ui/cards/DogCard';
 import AddDogForm from '../../ui/forms/AddDogForm';
 
@@ -10,7 +10,7 @@ function MyDogs() {
     let [dogs, setDogs] = useState([]);
 
     useEffect(() => {
-        axios.post(`/getUserDogsById`, { id: id }).then((res) => {
+        axios.post(`${serverURL}/getUserDogsById`, { id: id }).then((res) => {
             if (res.data === "sqli attemp") {
                 alert("no sqli attemps here!!")
             } else {
@@ -21,15 +21,16 @@ function MyDogs() {
         });
     }, [])
 
-    const AddNewDog = walkDetails => {
-        axios.post(`/addNewDog`, { dogDetails: walkDetails, id }).then((res) => {
+    const AddNewDog = dogDetails => {
+        console.log(dogDetails, id);
+        axios.post(`/addNewDog`, { dogDetails, id }).then((res) => {
             if (res.data === "sqli attemp") {
                 alert("no sqli attemps here!!")
             }
-            console.log(res.data.msg)
-            if (res.data === "dog-added") {
-                alert("dog-added!")
-                window.location.reload();
+
+            if (res.data.msg === "Dog-Added") {
+                console.log("dog added")
+                //window.location.href = `${origin}/Home/${res.data.user_id}/myDogs`
             }
         });
     }

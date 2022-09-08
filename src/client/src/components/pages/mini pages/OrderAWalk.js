@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { useParams } from 'react-router-dom';
-
-import DogCard from '../../ui/cards/DogCard';
-import AddDogForm from '../../ui/forms/AddDogForm';
 import OrderWalkForm from '../../ui/forms/OrderWalkForm';
+import { serverURL } from '../../../serverURL';
 
 function OrderAWalk() {
     const { id } = useParams()
     let [dogs, setDogs] = useState([]);
 
     useEffect(() => {
-        axios.post(`/getUserDogsById`, { id: id }).then((res) => {
+        axios.post(`${serverURL}/getUserDogsById`, { id: id }).then((res) => {
             if (res.data === "sqli attemp") {
                 alert("no sqli attemps here!!")
             } else {

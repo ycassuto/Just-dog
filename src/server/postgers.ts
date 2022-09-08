@@ -2,7 +2,7 @@ import { Client } from 'pg';
 import dotenv from 'dotenv'
 
 dotenv.config()
-const DATABASE_URL = process.env.DATABASE_URL
+const DATABASE_URL = process.env.DATABASE_URL || "postgres://jplsrpkremzjld:5d0b533b4da8df3e3201e40befb09c45df2bd43a89550295cd6b61919d3767a2@ec2-3-224-184-9.compute-1.amazonaws.com:5432/d9k8h8uopsh1su"
 export const client = new Client({
     connectionString: DATABASE_URL,
     ssl: {
@@ -108,7 +108,7 @@ export async function addNewUser(details: any, serverRes: any) {
         if (res.rows.length > 0) {
             serverRes.send(JSON.stringify("Email in use"))
         } else {
-            client.query(`INSERT INTO users (name, password, email) VALUES ('${details.full_name}', '${details.password}', '${details.email}');`, (err: Error, res) => {
+            client.query(`INSERT INTO users (name, password, email) VALUES ('${details.full_name}', '${details.password}', '${details.email}');`, (err: Error, _res) => {
                 if (err) throw err;
 
                 serverRes.send(JSON.stringify("user added"))
@@ -116,12 +116,11 @@ export async function addNewUser(details: any, serverRes: any) {
         }
     })
 }
-
 export async function addnewDog(dogDetails: any, userId: string, serverRes: any) {
-    client.query(`INSERT INTO dogs (name, age, type, chip_number, user_id) VALUES ('${dogDetails.name}', ${dogDetails.age}, '${dogDetails.type}', ${dogDetails.chipNumber}, ${userId});`, (err: Error, res) => {
+    client.query(`INSERT INTO dogs (name, age, type, chip_number, user_id) VALUES ('${dogDetails.name}', ${dogDetails.age}, '${dogDetails.type}', ${dogDetails.chipNumber}, ${userId});`, (err: Error, _res) => {
         if (err) throw err;
 
-        serverRes.send(JSON.stringify("dog-added"))
+        serverRes.send(JSON.stringify("dog added"))
     });
 }
 

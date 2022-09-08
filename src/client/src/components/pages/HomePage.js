@@ -4,7 +4,6 @@ import NavBar from "../ui/NavBar";
 import MyDogs from "./mini pages/MyDogs";
 import OrderAWalk from "./mini pages/OrderAWalk";
 
-
 function HomePage() {
     const {id} = useParams()
 
