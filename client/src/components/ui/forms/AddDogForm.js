@@ -9,7 +9,7 @@ function AddDogForm({ AddDog }) {
         e.preventDefault();
         AddDog(details)
     }
-
+    
     return (
         <form onSubmit={submitHandler}>
             <div className='form-inner'>

@@ -21,16 +21,15 @@ function MyDogs() {
         });
     }, [])
 
-    const AddNewDog = dogDetails => {
-        console.log(dogDetails, id);
-        axios.post(`/addNewDog`, { dogDetails, id }).then((res) => {
+    const AddNewDog = walkDetails => {
+        axios.post(`/addNewDog`, { dogDetails: walkDetails, id }).then((res) => {
             if (res.data === "sqli attemp") {
                 alert("no sqli attemps here!!")
             }
-
-            if (res.data.msg === "Dog-Added") {
-                console.log("dog added")
-                //window.location.href = `${origin}/Home/${res.data.user_id}/myDogs`
+            console.log(res.data.msg)
+            if (res.data === "dog-added") {
+                alert("dog-added!")
+                window.location.reload();
             }
         });
     }
