@@ -20,8 +20,8 @@ function OrderAWalk() {
         });
     }, [])
 
-    const OrderWalk = dogDetails => {
-        console.log(dogDetails, id);
+    const OrderWalk = reservaionsDetails => {
+        console.log(reservaionsDetails, id);
         // axios.post(`/addNewDog`, { dogDetails, id }).then((res) => {
         //     if (res.data === "sqli attemp") {
         //         alert("no sqli attemps here!!")
@@ -34,11 +34,9 @@ function OrderAWalk() {
         // });
     }
 
-    let dogsName = dogs.map((dog) => dog.name)
-
     return (
         <div className='order-a-walk-page'>
-            <OrderWalkForm OrderWalk={OrderWalk} dogsName={dogsName} />
+            <OrderWalkForm OrderWalk={OrderWalk} dogs={dogs} />
         </div>
     )
 }

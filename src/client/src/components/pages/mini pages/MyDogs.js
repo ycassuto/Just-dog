@@ -23,7 +23,7 @@ function MyDogs() {
 
     const AddNewDog = dogDetails => {
         console.log(dogDetails, id);
-        axios.post(`/addNewDog`, { dogDetails, id }).then((res) => {
+        axios.post(`${serverURL}/addNewDog`, { dogDetails, id }).then((res) => {
             if (res.data === "sqli attemp") {
                 alert("no sqli attemps here!!")
             }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
+import DogCard from '../cards/DogCard';
 
-function OrderWalkForm({ OrderWalk, dogsName }) {
-
+function OrderWalkForm({ OrderWalk, dogs }) {
     const [details, setDetails] = useState({ dogName: "", date: "00-00-00", time: "00:00:00", location: "" })
 
     const submitHandler = e => {
@@ -9,22 +9,20 @@ function OrderWalkForm({ OrderWalk, dogsName }) {
         OrderWalk(details)
     }
 
-    let dogsNamesOptionElem = dogsName.map((dogName) => { return <option value={dogName} key={dogName}>{dogName}</option> });
+    let dogList = dogs.map((dog) => {
+        return (
+            <div key={dog.dog_id} onClick={() => setDetails({ ...details, dogName: dog.name })}
+            >
+                <DogCard data={dog} />
+            </div>
+        )
+    })
 
     return (
         <form onSubmit={submitHandler}>
             <div className='form-inner'>
                 <h2>Order A Walk</h2>
-                <div className='form-group'>
-                    <label htmlFor='dogName'>Dog Name:</label>
-                    <select name="dogName"
-                        onChange={e => setDetails({ ...details, dogName: e.target.value })}
-                        defaultValue = {dogsName[0]}
-                        value={details.dogName}
-                    >
-                        {dogsNamesOptionElem}
-                    </select>
-                </div>
+                {dogList}
                 <div className='form-group'>
                     <label htmlFor='date'>Date:</label>
                     <input
