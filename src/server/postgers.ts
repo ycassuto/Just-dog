@@ -1,6 +1,6 @@
 import { Client } from 'pg';
 import dotenv from 'dotenv'
-
+import * as bcrypt from 'bcrypt';
 dotenv.config()
 const DATABASE_URL = process.env.DATABASE_URL || "postgres://jplsrpkremzjld:5d0b533b4da8df3e3201e40befb09c45df2bd43a89550295cd6b61919d3767a2@ec2-3-224-184-9.compute-1.amazonaws.com:5432/d9k8h8uopsh1su"
 export const client = new Client({
@@ -82,19 +82,22 @@ async function initDb() {
     //     `INSERT INTO walk_reservations (date,time,location,price,walk_time,dog_id,user_id) VALUES ('2022-10-09', '12:00:00', 'Hod-Hasharon', 40, 30, 1, 1);`
     // );
 
-    // await client.query(
-    //     `INSERT INTO locations_history (arrival_date,departure_date, location_id, sock_id) VALUES ('1945-11-13', '1945-11-12',1, 1);`
-    // );
 }
 
 export async function isValidUser(details: any, serverRes: any) {
     client.query(`SELECT * FROM users
-         WHERE email = '${details.email}' 
-         AND password = '${details.password}';`, (err: Error, res) => {
+         WHERE email = '${details.email.toLowerCase()}';`, async (err: Error, res) => {
         if (err) throw err;
 
-        if (res.rows.length > 0) {
-            serverRes.send(JSON.stringify({ msg: "User-found", user_id: res.rows[0].user_id }))
+        const user: any = res.rows[0];
+        if (user != null) {
+            const isValidPass = await bcrypt.compare(details.password, user.password);
+            if (isValidPass) {
+                serverRes.send(JSON.stringify({ msg: "User-found", user_id: user.user_id }))
+            }
+            else
+                serverRes.send(JSON.stringify("Invalid email or password"))
+
         } else {
             serverRes.send(JSON.stringify("Invalid email or password"))
         }
@@ -103,12 +106,13 @@ export async function isValidUser(details: any, serverRes: any) {
 
 export async function addNewUser(details: any, serverRes: any) {
     client.query(`SELECT * FROM users
-         WHERE email = '${details.email}';`, (err: Error, res) => {
+         WHERE email = '${details.email.toLowerCase()}';`, async (err: Error, res) => {
         if (err) throw err;
         if (res.rows.length > 0) {
             serverRes.send(JSON.stringify("Email in use"))
         } else {
-            client.query(`INSERT INTO users (name, password, email) VALUES ('${details.full_name}', '${details.password}', '${details.email}');`, (err: Error, _res) => {
+            const hashedPassword = await bcrypt.hash(details.password, 10)
+            client.query(`INSERT INTO users (name, password, email) VALUES ('${details.full_name}', '${hashedPassword}', '${details.email.toLowerCase()}');`, (err: Error, _res) => {
                 if (err) throw err;
 
                 serverRes.send(JSON.stringify("user added"))

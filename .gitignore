@@ -5,4 +5,4 @@ dist
 src\.env
 src\client\src\serverURL.js
 how-to-deploy.md
-src\.env
+src/.env
