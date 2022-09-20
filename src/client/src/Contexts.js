@@ -32,7 +32,6 @@ export function InfoProvider({ children }) {
             } else {
                 if (res.data !== "no dogs") {
                     setUserDogs(res.data);
-                    localStorage.clear();
                     localStorage.setItem("userDogs", JSON.stringify(res.data));
                 }
             }

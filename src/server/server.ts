@@ -50,10 +50,8 @@ app.post('/addNewDog', (request: any, response: any) => {
     isValidNumberInput(newDog.age) &&
     isValidNumberInput(id)
   ) {
-
     Database.addNewDog(newDog, id, response);
   } else {
-    console.log(id)
     response.send("sqli attemp");
   }
 });

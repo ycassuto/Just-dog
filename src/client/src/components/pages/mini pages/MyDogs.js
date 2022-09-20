@@ -1,5 +1,5 @@
 import React from 'react';
-import { useUserDogs, useUserId } from "../../../Contexts"
+import { useUserDogs, useUserId, useUpdateUserId } from "../../../Contexts"
 import axios from "axios";
 import { serverURL } from '../../../serverURL.js';
 import DogCard from '../../ui/cards/DogCard';
@@ -8,6 +8,7 @@ import AddDogForm from '../../ui/forms/AddDogForm';
 function MyDogs() {
     const userId = useUserId()
     const dogs = useUserDogs();
+    const userIdUpdate = useUpdateUserId()
 
     const AddNewDog = dogDetails => {
         axios.post(`${serverURL}/addNewDog`, { dogDetails, userId }).then((res) => {
@@ -16,6 +17,7 @@ function MyDogs() {
             }
 
             if (res.data === "dog added") {
+                userIdUpdate(userId)
                 window.location.reload();
             }
         });
