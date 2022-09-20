@@ -13,7 +13,6 @@ function LoginForm({ Login, error }) {
         <form onSubmit={submitHandler}>
             <div className='form-inner'>
                 <h2>Login</h2>
-                {/* {error} */}
                 <div className='form-group'>
                     <label htmlFor='email'>Email:</label>
                     <input

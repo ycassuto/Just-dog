@@ -1,17 +1,15 @@
 import React from "react";
-import { useParams, Route, Routes } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import NavBar from "../ui/NavBar";
 import MyDogs from "./mini pages/MyDogs";
 import OrderAWalk from "./mini pages/OrderAWalk";
 
 function HomePage() {
-    const {id} = useParams()
 
     return (
         <div className="Home-page">
-            <NavBar id={id} />
+            <NavBar />
             <Routes>
-
                 <Route path="/myDogs" element={<MyDogs/>} />
                 <Route path="/myReservations" element={<div>myReservations</div>} />
                 <Route path="/orderWalk" element={<OrderAWalk/>} />

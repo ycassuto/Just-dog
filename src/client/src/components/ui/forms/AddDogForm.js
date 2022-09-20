@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 function AddDogForm({ AddDog }) {
-
-
     const [details, setDetails] = useState({ name: "", type: "", age: 0, chipNumber: 0 })
 
     const submitHandler = e => {

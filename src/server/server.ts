@@ -42,7 +42,7 @@ app.post('/registerNewUser', (request: any, response: any) => {
 
 app.post('/addNewDog', (request: any, response: any) => {
   let newDog = request.body.dogDetails;
-  let id = request.body.id;
+  let id = request.body.userId;
   if (
     isValidNameInput(newDog.type) &&
     isValidNameInput(newDog.name) &&
@@ -51,8 +51,9 @@ app.post('/addNewDog', (request: any, response: any) => {
     isValidNumberInput(id)
   ) {
 
-    Database.addnewDog(newDog, id, response);
+    Database.addNewDog(newDog, id, response);
   } else {
+    console.log(id)
     response.send("sqli attemp");
   }
 });

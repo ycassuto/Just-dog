@@ -1,36 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useUserDogs, useUserId } from "../../../Contexts"
 import axios from "axios";
-import { useParams } from 'react-router-dom';
 import { serverURL } from '../../../serverURL.js';
 import DogCard from '../../ui/cards/DogCard';
 import AddDogForm from '../../ui/forms/AddDogForm';
 
 function MyDogs() {
-    const { id } = useParams()
-    let [dogs, setDogs] = useState([]);
-
-    useEffect(() => {
-        axios.post(`${serverURL}/getUserDogsById`, { id: id }).then((res) => {
-            if (res.data === "sqli attemp") {
-                alert("no sqli attemps here!!")
-            } else {
-                if (res.data !== "no dogs") {
-                    setDogs(res.data);
-                }
-            }
-        });
-    }, [])
+    const userId = useUserId()
+    const dogs = useUserDogs();
 
     const AddNewDog = dogDetails => {
-        console.log(dogDetails, id);
-        axios.post(`${serverURL}/addNewDog`, { dogDetails, id }).then((res) => {
+        axios.post(`${serverURL}/addNewDog`, { dogDetails, userId }).then((res) => {
             if (res.data === "sqli attemp") {
                 alert("no sqli attemps here!!")
             }
 
-            if (res.data.msg === "Dog-Added") {
-                console.log("dog added")
-                //window.location.href = `${origin}/Home/${res.data.user_id}/myDogs`
+            if (res.data === "dog added") {
+                window.location.reload();
             }
         });
     }
@@ -42,7 +28,9 @@ function MyDogs() {
     return (
         <div className='my-dogs-page'>
             <h2>you'r dogs:</h2>
-            {dogList}
+            <div className='dogs-list'>
+                {dogList}
+            </div>
             <AddDogForm AddDog={AddNewDog} />
         </div>
     )
