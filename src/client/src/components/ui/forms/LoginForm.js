@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import "../../../styles/Login&SignupForm.scss";
 
 function LoginForm({ Login, error }) {
 
@@ -10,30 +11,32 @@ function LoginForm({ Login, error }) {
     }
 
     return (
-        <form onSubmit={submitHandler}>
-            <div className='form-inner'>
-                <h2>Login</h2>
-                <div className='form-group'>
-                    <label htmlFor='email'>Email:</label>
+        <div className='login-form'>
+            <form onSubmit={submitHandler}>
+                <span><h2>Login</h2></span>
+                <div className='form-field'>
+                    <label htmlFor='email'>Email:</label><br />
                     <input
+                        className='form-input'
                         type='email'
                         name='email'
                         onChange={e => setDetails({ ...details, email: e.target.value })}
                         value={details.email}
                     />
                 </div>
-                <div className='form-group'>
+                <div className='form-field'>
                     <label htmlFor='password'>Password:</label>
                     <input
+                        className='form-input'
                         type='password'
                         name='password'
                         onChange={e => setDetails({ ...details, password: e.target.value })}
                         value={details.password}
                     />
                 </div>
-                <input type='submit' value='Login'></input>
-            </div>
-        </form>
+                <input type='submit' value='Login' className='form-submit'></input>
+            </form>
+        </div>
     )
 }
 

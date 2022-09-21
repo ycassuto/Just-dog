@@ -7,7 +7,7 @@ function OrderAWalk() {
     const dogs = useUserDogs();
 
     const OrderWalk = reservaionsDetails => {
-        console.log(reservaionsDetails, userId);
+        console.log(reservaionsDetails);
         // axios.post(`/addNewDog`, { dogDetails, id }).then((res) => {
         //     if (res.data === "sqli attemp") {
         //         alert("no sqli attemps here!!")

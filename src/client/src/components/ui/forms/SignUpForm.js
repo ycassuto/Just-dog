@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import validation from './SignupValidation';
-
+import "../../../styles/Login&SignupForm.scss";
 function SignUpForm({ SignUp }) {
 
     const [details, setDetails] = useState({ full_name: "", email: "", password: "" })
-    const [errors, setErrors] = useState({err:""});
+    const [errors, setErrors] = useState({ err: "" });
 
     const submitHandler = e => {
         e.preventDefault();
@@ -18,12 +18,13 @@ function SignUpForm({ SignUp }) {
     }, [errors])
 
     return (
-        <form onSubmit={submitHandler}>
-            <div className='form-inner'>
-                <h2>SignUp</h2>
-                <div className='form-group'>
+        <div className='signup-form'>
+            <form onSubmit={submitHandler}>
+                <span><h2>Sign Up</h2></span>
+                <div className='form-field'>
                     <label htmlFor='full_name'>full name:</label>
                     <input
+                        className='form-input'
                         type='text'
                         name='fullname'
                         onChange={e => setDetails({ ...details, full_name: e.target.value })}
@@ -31,9 +32,10 @@ function SignUpForm({ SignUp }) {
                     />
                     {errors.full_name && <p>{errors.full_name}</p>}
                 </div>
-                <div className='form-group'>
-                    <label htmlFor='email'>Email:</label>
+                <div className='form-field'>
+                    <label htmlFor='email'>Email:</label><br />
                     <input
+                        className='form-input'
                         type='email'
                         name='email'
                         onChange={e => setDetails({ ...details, email: e.target.value })}
@@ -41,9 +43,10 @@ function SignUpForm({ SignUp }) {
                     />
                     {errors.email && <p>{errors.email}</p>}
                 </div>
-                <div className='form-group'>
+                <div className='form-field'>
                     <label htmlFor='password'>Password:</label>
                     <input
+                        className='form-input'
                         type='password'
                         name='password'
                         onChange={e => setDetails({ ...details, password: e.target.value })}
@@ -51,9 +54,9 @@ function SignUpForm({ SignUp }) {
                     />
                     {errors.password && <p>{errors.password}</p>}
                 </div>
-                <input type='submit' value='SignUp'></input>
-            </div>
-        </form>
+                <input type='submit' value='Sign Up' className='form-submit'></input>
+            </form >
+        </div>
     )
 }
 
