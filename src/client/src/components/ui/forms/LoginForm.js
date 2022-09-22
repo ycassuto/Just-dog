@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "../../../styles/Login&SignupForm.scss";
 
-function LoginForm({ Login, error }) {
+function LoginForm({ Login, toggle }) {
 
     const [details, setDetails] = useState({ email: "", password: "" })
 
@@ -13,7 +13,7 @@ function LoginForm({ Login, error }) {
     return (
         <div className='login-form'>
             <form onSubmit={submitHandler}>
-                <span><h2>Login</h2></span>
+                <div className='form-title'><p>Login</p></div>
                 <div className='form-field'>
                     <label htmlFor='email'>Email:</label><br />
                     <input
@@ -36,6 +36,7 @@ function LoginForm({ Login, error }) {
                 </div>
                 <input type='submit' value='Login' className='form-submit'></input>
             </form>
+            <p className="signuplogin-click" onClick={toggle}>Did not sign up? click here</p>
         </div>
     )
 }

@@ -50,11 +50,11 @@ function LoginPage() {
         });
     }
 
-    return (
+    return (<>
         <div className="Login-page">
-            {loginSignupToggle ? <LoginForm Login={Login} /> : <SignUpForm SignUp={SignUp} />}
-            {loginSignupToggle ? <p onClick={toggleLoginSignup}>Did not sign up? click here</p> : <p onClick={toggleLoginSignup}>Already sign up? click here</p>}
+            {loginSignupToggle ? <LoginForm Login={Login} toggle={toggleLoginSignup} /> : <SignUpForm SignUp={SignUp} toggle={toggleLoginSignup} />}
         </div>
+    </>
     )
 }
 

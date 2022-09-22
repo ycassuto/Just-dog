@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import validation from './SignupValidation';
 import "../../../styles/Login&SignupForm.scss";
-function SignUpForm({ SignUp }) {
+function SignUpForm({ SignUp, toggle }) {
 
     const [details, setDetails] = useState({ full_name: "", email: "", password: "" })
     const [errors, setErrors] = useState({ err: "" });
@@ -22,7 +22,7 @@ function SignUpForm({ SignUp }) {
             <form onSubmit={submitHandler}>
                 <span><h2>Sign Up</h2></span>
                 <div className='form-field'>
-                    <label htmlFor='full_name'>full name:</label>
+                    <label htmlFor='full_name'>Full name:</label>
                     <input
                         className='form-input'
                         type='text'
@@ -56,6 +56,7 @@ function SignUpForm({ SignUp }) {
                 </div>
                 <input type='submit' value='Sign Up' className='form-submit'></input>
             </form >
+            <p className="signuplogin-click" onClick={toggle}>Already sign up? click here</p>
         </div>
     )
 }
