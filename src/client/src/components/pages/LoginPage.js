@@ -5,7 +5,7 @@ import { serverURL } from "../../serverURL";
 import { useUpdateUserId } from "../../Contexts"
 import LoginForm from "../ui/forms/LoginForm";
 import SignUpForm from "../ui/forms/SignUpForm"
-import "../../styles/LoginPage.scss"
+import "../../styles/Pages/LoginPage.scss"
 
 function LoginPage() {
     const navigate = useNavigate();

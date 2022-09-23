@@ -4,7 +4,7 @@ import axios from "axios";
 import { serverURL } from '../../../serverURL.js';
 import DogCard from '../../ui/cards/DogCard';
 import AddDogForm from '../../ui/forms/AddDogForm';
-import "../../../styles/DogCard.scss"
+import "../../../styles/Pages/MyDogsPage.scss"
 
 function MyDogs() {
     const userId = useUserId()

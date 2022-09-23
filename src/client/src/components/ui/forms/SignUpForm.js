@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import validation from './SignupValidation';
 import "../../../styles/Login&SignupForm.scss";
+
 function SignUpForm({ SignUp, toggle }) {
 
     const [details, setDetails] = useState({ full_name: "", email: "", password: "" })

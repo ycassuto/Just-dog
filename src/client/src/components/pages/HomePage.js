@@ -3,6 +3,8 @@ import { Route, Routes } from "react-router-dom"
 import NavBar from "../ui/NavBar";
 import MyDogs from "./mini pages/MyDogs";
 import OrderAWalk from "./mini pages/OrderAWalk";
+import "../../styles/NavBar.scss"
+
 
 function HomePage() {
 
