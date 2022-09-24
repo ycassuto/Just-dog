@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../../../styles/Login&SignupForm.scss";
+import "../../../styles/FormTemplate.scss";
 
 function LoginForm({ Login, toggle }) {
 
@@ -11,7 +11,7 @@ function LoginForm({ Login, toggle }) {
     }
 
     return (
-        <div className='login-form'>
+        <div className='form-template'>
             <form onSubmit={submitHandler}>
                 <div className='form-title'><p>Login</p></div>
                 <div className='form-field'>

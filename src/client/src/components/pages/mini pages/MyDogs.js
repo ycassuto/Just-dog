@@ -30,7 +30,7 @@ function MyDogs() {
 
     return (
         <div className='my-dogs-page'>
-            <h2>you'r dogs:</h2>
+            <h2>You'r Dogs:</h2>
             <div className='dogs-list'>
                 {dogList}
             </div>

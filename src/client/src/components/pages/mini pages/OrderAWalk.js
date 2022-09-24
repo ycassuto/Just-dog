@@ -1,7 +1,7 @@
 import React from 'react';
 import OrderWalkForm from '../../ui/forms/OrderWalkForm';
 import {useUserDogs, useUserId} from "../../../Contexts"
-
+import "../../../styles/Pages/OrderWalkPage.scss"
 function OrderAWalk() {
     const userId = useUserId()
     const dogs = useUserDogs();

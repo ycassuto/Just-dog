@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import validation from './SignupValidation';
-import "../../../styles/Login&SignupForm.scss";
+import "../../../styles/FormTemplate.scss";
 
 function SignUpForm({ SignUp, toggle }) {
 
@@ -19,7 +19,7 @@ function SignUpForm({ SignUp, toggle }) {
     }, [errors])
 
     return (
-        <div className='signup-form'>
+        <div className='form-template'>
             <form onSubmit={submitHandler}>
                 <span><h2>Sign Up</h2></span>
                 <div className='form-field'>
