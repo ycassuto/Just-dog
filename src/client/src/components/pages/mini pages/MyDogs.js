@@ -25,7 +25,7 @@ function MyDogs() {
     }
 
     let dogList = dogs.map((dog) => {
-        return (<DogCard key={dog.dog_id} data={dog} />)
+        return (<DogCard key={dog.dog_id} data={dog} isOnClick={false} />)
     })
 
     return (

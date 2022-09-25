@@ -31,7 +31,7 @@ function SignUpForm({ SignUp, toggle }) {
                         onChange={e => setDetails({ ...details, full_name: e.target.value })}
                         value={details.name}
                     />
-                    {errors.full_name && <p>{errors.full_name}</p>}
+                    {errors.full_name && <h4>{errors.full_name}</h4>}
                 </div>
                 <div className='form-field'>
                     <label htmlFor='email'>Email:</label><br />
@@ -42,7 +42,7 @@ function SignUpForm({ SignUp, toggle }) {
                         onChange={e => setDetails({ ...details, email: e.target.value })}
                         value={details.email}
                     />
-                    {errors.email && <p>{errors.email}</p>}
+                    {errors.email && <h4>{errors.email}</h4>}
                 </div>
                 <div className='form-field'>
                     <label htmlFor='password'>Password:</label>
@@ -53,7 +53,7 @@ function SignUpForm({ SignUp, toggle }) {
                         onChange={e => setDetails({ ...details, password: e.target.value })}
                         value={details.password}
                     />
-                    {errors.password && <p>{errors.password}</p>}
+                    {errors.password && <h4>{errors.password}</h4>}
                 </div>
                 <input type='submit' value='Sign Up' className='form-submit'></input>
             </form >
