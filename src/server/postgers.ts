@@ -128,6 +128,14 @@ export async function addNewDog(dogDetails: any, userId: string, serverRes: any)
     });
 }
 
+export async function reserveWalk(walkDetails: any, userId: string, serverRes: any) {//INSERT INTO walk_reservations (date, time, location, price, walk_time, dog_id, user_id) VALUES ('2000-12-12', '10:00', 'HOD', 4, 4,12,1);
+    client.query(`INSERT INTO walk_reservations (date, time, location, price, walk_time, dog_id, user_id) VALUES ('${walkDetails.date}', '${walkDetails.time}', '${walkDetails.location}', ${walkDetails.price}, ${walkDetails.walk_time}, ${walkDetails.dogId}, ${userId});`, (err: Error, _res) => {
+        if (err) throw err;
+
+        serverRes.send(JSON.stringify("reservation added"))
+    });
+}
+
 export async function getDogsByUserId(userId: string, serverRes: any) {
     client.query(`SELECT * FROM dogs
          WHERE user_id=${userId};`, (err: Error, res) => {

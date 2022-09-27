@@ -1,23 +1,25 @@
 import React from 'react';
 import OrderWalkForm from '../../ui/forms/OrderWalkForm';
-import {useUserDogs, useUserId} from "../../../Contexts"
+import { useUserDogs, useUserId } from "../../../Contexts"
 import "../../../styles/Pages/OrderWalkPage.scss"
+import axios from 'axios';
+import { serverURL } from '../../../serverURL';
+
 function OrderAWalk() {
     const userId = useUserId()
     const dogs = useUserDogs();
 
-    const OrderWalk = reservaionsDetails => {
-        console.log(reservaionsDetails);
-        // axios.post(`/addNewDog`, { dogDetails, id }).then((res) => {
-        //     if (res.data === "sqli attemp") {
-        //         alert("no sqli attemps here!!")
-        //     }
+    const OrderWalk = walkDetails => {
+        console.log(walkDetails);
+        axios.post(`${serverURL}/orderWalk`, { walkDetails, userId }).then((res) => {
+            if (res.data === "sqli attemp") {
+                alert("no sqli attemps here!!")
+            }
 
-        //     if (res.data.msg === "WalkOrders") {
-        //         console.log("dog added")
-        //         //window.location.href = `${origin}/Home/${res.data.user_id}/myDogs`
-        //     }
-        // });
+            if (res.data === "reservation added") {
+                alert("reservation added")
+            }
+        });
     }
 
     return (

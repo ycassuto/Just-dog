@@ -56,6 +56,17 @@ app.post('/addNewDog', (request: any, response: any) => {
   }
 });
 
+app.post('/orderWalk', (request: any, response: any) => {
+  let newWalk = request.body.walkDetails;
+  let id = request.body.userId;
+
+  if (isValidNameInput(newWalk.location)) {
+    Database.reserveWalk(newWalk, id, response);
+  } else {
+    response.send("sqli attemp");
+  }
+});
+
 app.post('/getUserDogsById', (request: any, response: any) => {
   let userId = request.body.id
   if (isValidNumberInput(userId)) {
