@@ -42,6 +42,7 @@ async function initDb() {
           date DATE NOT NULL,
           time TIME NOT NULL,
           location Text NOT NULL,
+          dogName Text NOT NULL,
           price INTEGER NOT NULL,
           walk_time INTEGER NOT NULL,
           dog_id INTEGER,
@@ -69,19 +70,6 @@ async function initDb() {
             REFERENCES walk_reservations(reservation_id)
         );`
     );
-
-    // await client.query(
-    //     `INSERT INTO users (name, password, email) VALUES ('yuval cassuto', '123456789', 'yuval@gmail.com');`
-    // );
-
-    // await client.query(
-    //     `INSERT INTO dogs (name,age,type,chip_number,user_id) VALUES ('Blue', 11, 'Husky', 206969, 1);`
-    // );
-
-    // await client.query(
-    //     `INSERT INTO walk_reservations (date,time,location,price,walk_time,dog_id,user_id) VALUES ('2022-10-09', '12:00:00', 'Hod-Hasharon', 40, 30, 1, 1);`
-    // );
-
 }
 
 export async function isValidUser(details: any, serverRes: any) {
@@ -128,8 +116,8 @@ export async function addNewDog(dogDetails: any, userId: string, serverRes: any)
     });
 }
 
-export async function reserveWalk(walkDetails: any, userId: string, serverRes: any) {//INSERT INTO walk_reservations (date, time, location, price, walk_time, dog_id, user_id) VALUES ('2000-12-12', '10:00', 'HOD', 4, 4,12,1);
-    client.query(`INSERT INTO walk_reservations (date, time, location, price, walk_time, dog_id, user_id) VALUES ('${walkDetails.date}', '${walkDetails.time}', '${walkDetails.location}', ${walkDetails.price}, ${walkDetails.walk_time}, ${walkDetails.dogId}, ${userId});`, (err: Error, _res) => {
+export async function reserveWalk(walkDetails: any, userId: string, serverRes: any) {
+    client.query(`INSERT INTO walk_reservations (date, time, location, dogName, price, walk_time, dog_id, user_id) VALUES ('${walkDetails.date}', '${walkDetails.time}', '${walkDetails.location}','${walkDetails.dogName}', ${walkDetails.price}, ${walkDetails.walk_time}, ${walkDetails.dogId}, ${userId});`, (err: Error, _res) => {
         if (err) throw err;
 
         serverRes.send(JSON.stringify("reservation added"))
@@ -145,5 +133,14 @@ export async function getDogsByUserId(userId: string, serverRes: any) {
         } else {//user dont have dogs
             serverRes.send(JSON.stringify("no dogs"))
         }
+    })
+}
+
+export async function getUserReservation(userId: string, serverRes: any) {
+    client.query(`SELECT * FROM walk_reservations
+         WHERE user_id=${userId};`, (err: Error, res) => {
+        if (err) throw err;
+
+        serverRes.send(JSON.stringify(res.rows))
     })
 }

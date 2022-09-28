@@ -67,6 +67,11 @@ app.post('/orderWalk', (request: any, response: any) => {
   }
 });
 
+app.post('/userReservations', (request: any, response: any) => {
+  let id = request.body.userId;
+  Database.getUserReservation(id, response);
+});
+
 app.post('/getUserDogsById', (request: any, response: any) => {
   let userId = request.body.id
   if (isValidNumberInput(userId)) {
